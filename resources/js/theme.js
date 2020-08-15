@@ -1,3 +1,5 @@
+document.getElementsByTagName('html')[0].dir = "rtl";
+
 var head = document.head;
 
 var link = document.createElement('link');
