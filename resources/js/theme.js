@@ -1,4 +1,5 @@
 var head = document.head;
+head.setAttribute('dir', 'rtl');
 
 var link = document.createElement('link');
 link.rel = 'stylesheet';
