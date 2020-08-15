@@ -1,5 +1,3 @@
-document.getElementsByTagName('html')[0].dir = "rtl";
-
 var head = document.head;
 
 var link = document.createElement('link');
@@ -15,3 +13,5 @@ var css = 'html, button, input, optgroup, select, textarea, .chartist-tooltip, .
     '}';
 style.appendChild(document.createTextNode(css));
 head.appendChild(style);
+
+document.getElementsByTagName('html')[0].dir = "rtl";
