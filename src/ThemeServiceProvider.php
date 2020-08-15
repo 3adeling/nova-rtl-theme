@@ -2,6 +2,7 @@
 
 namespace Pishran\NovaRtlTheme;
 
+use App;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
@@ -15,21 +16,26 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         Nova::serving(function (ServingNova $event) {
-            Nova::provideToScript([
-                'nova_rtl_theme' => [
-                    'stylesheet' => config('nova-rtl-theme.stylesheet'),
-                    'font_family' => config('nova-rtl-theme.font-family'),
-                ],
-            ]);
+            if (App::isLocale('ar')) {
+                Nova::provideToScript([
+                    'nova_rtl_theme' => [
+                        'stylesheet' => config('nova-rtl-theme.stylesheet'),
+                        'font_family' => config('nova-rtl-theme.font-family'),
+                    ],
+                ]);
 
-            Nova::style('nova-rtl-theme', __DIR__.'/../resources/css/theme.css');
+                Nova::style('nova-rtl-theme', __DIR__ . '/../resources/css/theme.css');
 
-            Nova::script('nova-rtl-theme', __DIR__.'/../resources/js/theme.js');
+                Nova::script('nova-rtl-theme', __DIR__ . '/../resources/js/theme.js');
+            } else {
+                App::setLocale('en');
+            }
         });
 
         $this->publishes([
-            __DIR__.'/../config/nova-rtl-theme.php' => config_path('nova-rtl-theme.php'),
+            __DIR__ . '/../config/nova-rtl-theme.php' => config_path('nova-rtl-theme.php'),
         ], 'nova-rtl-theme');
     }
 
@@ -41,7 +47,8 @@ class ThemeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/nova-rtl-theme.php', 'nova-rtl-theme'
+            __DIR__ . '/../config/nova-rtl-theme.php',
+            'nova-rtl-theme'
         );
     }
 }
