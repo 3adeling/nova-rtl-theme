@@ -31,6 +31,7 @@ class ThemeServiceProvider extends ServiceProvider
                 Nova::script('nova-rtl-theme', __DIR__ . '/../resources/js/theme.js');
             } else {
                 App::setLocale('en');
+                Nova::script('nova-rtl-theme', __DIR__ . '/../resources/js/ltr-theme.js');
             }
         });
 
